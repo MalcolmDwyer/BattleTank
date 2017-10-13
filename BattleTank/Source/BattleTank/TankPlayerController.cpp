@@ -6,9 +6,7 @@
 void ATankPlayerController::BeginPlay()
 {
   Super::BeginPlay();
-  
-  UE_LOG(LogTemp, Warning, TEXT("Player Controller begin play"));
-  
+    
   auto ControlledTank = GetControlledTank();
   if (ControlledTank) {
     UE_LOG(LogTemp, Warning, TEXT(" Got Tank -> %s"), *(ControlledTank->GetName()))
