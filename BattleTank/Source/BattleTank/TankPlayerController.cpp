@@ -64,8 +64,21 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
   
   
   // Deproject the screen position of the cross to a world direction
+  auto CameraWorldLocation = FVector();
+  auto LookDirection = FVector();
+  if (GetLookDirection(ScreenLocation, LookDirection)) {
+    UE_LOG(LogTemp, Warning, TEXT("Crosshair direction: %s"), *LookDirection.ToString())
+  }
+  
   // Line trace to see what we hit (up to max range)
   
+  
   return true;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+  auto CameraWorldLocation = FVector();
+  return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
 }
 
