@@ -61,15 +61,21 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
   
   if (bHaveAimSolution) {
     auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-    UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *OurTankName, *AimDirection.ToString())
-    MoveBarrel(AimDirection);
+//    UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *OurTankName, *AimDirection.ToString())
+    MoveBarrelTowards(AimDirection);
   }
 }
 
-void UTankAimingComponent::MoveBarrel(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
   // Transform AimDirection based on rotation of entire tank
   // Rotate turret gimbal to corresponding to X,Y components
   // Elevate turret to corresponding Z component.
+  
+  auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+  auto AimAsRotator = AimDirection.Rotation();
+  auto DeltaRotator = AimAsRotator - BarrelRotator;
+  UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString())
+  
 }
 
