@@ -18,7 +18,6 @@ class BATTLETANK_API ATank : public APawn
   
 public:
   virtual void BeginPlay() override;
-  virtual void Tick(float DeltaTime) override;
   void AimAt(FVector HitLocation);
   
   UFUNCTION(BlueprintCallable, Category = Setup)
