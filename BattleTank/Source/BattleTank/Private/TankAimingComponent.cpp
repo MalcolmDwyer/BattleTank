@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -33,7 +34,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
   Barrel = BarrelToSet;
 }
@@ -68,6 +69,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+  if (!Barrel) { return; }
+  
   // Transform AimDirection based on rotation of entire tank
   // Rotate turret gimbal to corresponding to X,Y components
   // Elevate turret to corresponding Z component.
@@ -76,6 +79,8 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
   auto AimAsRotator = AimDirection.Rotation();
   auto DeltaRotator = AimAsRotator - BarrelRotator;
   UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString())
+  
+  Barrel->Elevate(5); // TODO remove magic number
   
 }
 
