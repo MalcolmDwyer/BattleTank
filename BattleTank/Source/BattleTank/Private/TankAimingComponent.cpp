@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -39,10 +40,16 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
   Barrel = BarrelToSet;
 }
 
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+  Turret = TurretToSet;
+}
+
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
   auto OurTankName = GetOwner()->GetName();
   if (!Barrel) { return; }
+  if (!Turret) { return; }
   
   auto BarrelLocation = Barrel->GetComponentLocation();
   
@@ -79,6 +86,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
   if (!Barrel) { return; }
+  if (!Turret) { return; }
   
   // Transform AimDirection based on rotation of entire tank
   // Rotate turret gimbal to corresponding to X,Y components
@@ -90,5 +98,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 //  UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString())
   
   Barrel->Elevate(DeltaRotator.Pitch);
+  Turret->Rotate(DeltaRotator.Yaw);
 }
 
