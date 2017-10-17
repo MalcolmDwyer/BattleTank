@@ -31,7 +31,7 @@ public:
   UFUNCTION(BlueprintCallable, Category = Setup)
   void SetTurretReference(UTankTurret* TurretToSet);
   
-  UPROPERTY(EditAnywhere, Category = Firing)
+  UPROPERTY(EditDefaultsOnly, Category = Firing)
   float LaunchSpeed = 6000.0f; // 1000 m/s
 
 protected:
@@ -40,15 +40,19 @@ protected:
 private:
 	// Sets default values for this pawn's properties
 	ATank();
+  
+  UPROPERTY(EditDefaultsOnly, Category = Setup)
+  TSubclassOf<AProjectile> ProjectileBlueprint;
 
   // Called to bind functionality to input
   virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
-  UPROPERTY(EditAnywhere, Category = Setup)
-  TSubclassOf<AProjectile> ProjectileBlueprint;
+  
   
   UTankBarrel* Barrel = nullptr;
   
+  UPROPERTY(EditDefaultsOnly, Category = Firing)
   float ReloadTimeInSeconds = 3.0f;
+  
   double LastFireTime = 0;
 };
