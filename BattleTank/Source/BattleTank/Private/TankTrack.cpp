@@ -5,3 +5,11 @@
 
 
 
+void UTankTrack::SetThrottle(float Throttle)
+{
+
+  auto Name = GetName();
+  auto Time = GetWorld()->GetTimeSeconds();
+  UE_LOG(LogTemp, Warning, TEXT("%f %s Throttle %f"), Time, *Name, Throttle)
+  
+}
