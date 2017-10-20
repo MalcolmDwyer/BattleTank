@@ -36,6 +36,7 @@ public:
   float LaunchSpeed = 6000.0f; // 1000 m/s
 
 protected:
+  UPROPERTY(BlueprintReadOnly)
   UTankAimingComponent* TankAimingComponent = nullptr;
   
   UPROPERTY(BlueprintReadOnly)

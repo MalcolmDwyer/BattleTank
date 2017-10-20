@@ -17,7 +17,7 @@ class BATTLETANK_API ATankAIController : public AAIController
 	GENERATED_BODY()
   
 private:
-  float AcceptanceRadius = 3000; // centimeters?
+  float AcceptanceRadius = 10; // centimeters?
   
 public:
   void BeginPlay() override;
