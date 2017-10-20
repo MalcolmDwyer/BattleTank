@@ -26,7 +26,8 @@ void ATank::BeginPlay()
 }
 
 void ATank::AimAt(FVector HitLocation) {
-  if (!TankAimingComponent)
+//  if (!ensure(TankAimingComponent))
+  if (!(TankAimingComponent))
   {
 //    UE_LOG(LogTemp, Error, TEXT("Tank has no TankAimingComponent!"))
     return;

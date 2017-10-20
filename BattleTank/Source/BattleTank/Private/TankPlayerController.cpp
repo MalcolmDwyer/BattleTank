@@ -3,6 +3,7 @@
 #include "TankPlayerController.h"
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "Misc/AssertionMacros.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -36,7 +37,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 
 void ATankPlayerController::AimTowardsCrossHair()
 {
-  if (!GetControlledTank()) {
+  if (!ensure(GetControlledTank())) {
     return;
   }
   
