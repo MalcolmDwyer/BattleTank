@@ -2,11 +2,21 @@
 
 #include "TankPlayerController.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay()
 {
   Super::BeginPlay();
-  ControlledTank = GetControlledTank();
+  UE_LOG(LogTemp, Warning, TEXT("SLUGGO TankPlayerController BeginPlay"))
+  
+  auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+  if (AimingComponent) {
+    FoundAimingComponent(AimingComponent);
+  }
+  else {
+    UE_LOG(LogTemp, Error, TEXT("AimingComponent not found in tank (TankPlayerController.BeginPlay)"))
+  }
+  
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

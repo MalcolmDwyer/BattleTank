@@ -10,6 +10,7 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 /**
  * 
@@ -23,6 +24,9 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 protected:
   UFUNCTION(BlueprintCallable, Category = "Setup")
   ATank* GetControlledTank() const;
+  
+  UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+  void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 
 public:
   void BeginPlay() override;
@@ -37,9 +41,7 @@ public:
   UPROPERTY(EditDefaultsOnly)
   float LineTraceRange = 1000000; // 10km
   
-private:
-  ATank* ControlledTank;
-  
+private:  
   // Start moving the barrel so that it would shoot where the crosshair
   // intersects the world
   void AimTowardsCrossHair();
