@@ -11,9 +11,6 @@ UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
-  
-public:
-  virtual void BeginPlay() override;
 
 private:
 	// Sets default values for this pawn's properties
