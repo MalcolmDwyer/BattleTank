@@ -12,7 +12,8 @@ enum class EFiringState : uint8
 {
   Reloading,
   Aiming,
-  Locked
+  Locked,
+  Empty
 };
 
 // Forward declaration
@@ -46,12 +47,18 @@ public:
   
   EFiringState GetFiringState() const;
   
+  UFUNCTION(BlueprintCallable, Category = "Firing")
+  int32 GetAmmoCount() const;
+  
 protected:
   UPROPERTY(BlueprintReadonly, Category = "State")
   EFiringState FiringState = EFiringState::Reloading;
   
   UPROPERTY(EditDefaultsOnly, Category = "Firing")
   float LaunchSpeed = 6000.0f; // 1000 m/s
+  
+  UPROPERTY(EditDefaultsOnly, Category = "Firing")
+  int32 AmmoCount = 3;
   
   UPROPERTY(EditDefaultsOnly, Category = "Setup")
   TSubclassOf<AProjectile> ProjectileBlueprint;
