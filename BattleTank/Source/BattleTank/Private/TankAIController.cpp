@@ -17,11 +17,8 @@ void ATankAIController::Tick(float DeltaTime)
   auto PlayerTank = (GetWorld()->GetFirstPlayerController()->GetPawn());
   
   if (PlayerTank) {
-    
     MoveToActor(PlayerTank, AcceptanceRadius);
     AimingComponent->AimAt(PlayerTank->GetActorLocation());
-    // TODO: Fire if ready
-//    ControlledTank->Fire();
+    AimingComponent->Fire();
   }
-
 }

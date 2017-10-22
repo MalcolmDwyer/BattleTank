@@ -7,34 +7,15 @@
 
 #include "Tank.generated.h"
 
-class UTankBarrel;
-class UTankTurret;
-class AProjectile;
-
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
-
   
 public:
   virtual void BeginPlay() override;
-  void AimAt(FVector HitLocation);
-  
-  UFUNCTION(BlueprintCallable)
-  void Fire();
 
 private:
 	// Sets default values for this pawn's properties
 	ATank();
-  
-  UPROPERTY(EditDefaultsOnly, Category = "Setup")
-  TSubclassOf<AProjectile> ProjectileBlueprint;
-
-  UTankBarrel* Barrel = nullptr; // TODO Remove
-  
-  UPROPERTY(EditDefaultsOnly, Category = "Firing")
-  float ReloadTimeInSeconds = 3.0f;
-  
-  double LastFireTime = 0;
 };
