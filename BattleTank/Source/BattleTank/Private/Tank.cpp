@@ -4,7 +4,6 @@
 #include "TankBarrel.h"
 #include "Engine/StaticMeshSocket.h"
 #include "Projectile.h"
-#include "TankAimingComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -18,17 +17,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-  TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FVector HitLocation) {
-//  if (!ensure(TankAimingComponent))
-  if (!(TankAimingComponent))
-  {
-//    UE_LOG(LogTemp, Error, TEXT("Tank has no TankAimingComponent!"))
-    return;
-  }
-  TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+//  TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::Fire()
@@ -44,7 +33,7 @@ void ATank::Fire()
                                         Barrel->GetSocketRotation(FName("Projectile"))
                                         );
     
-    Projectile->LaunchProjectile(LaunchSpeed);
+//    Projectile->LaunchProjectile(LaunchSpeed);
     LastFireTime = FPlatformTime::Seconds();
   }
   
