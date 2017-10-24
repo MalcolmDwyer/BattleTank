@@ -110,11 +110,7 @@ void UTankAimingComponent::MoveBarrelTowards()
   Turret->Rotate(
     ((FMath::Abs(DeltaRotator.Yaw) > 180.0) ? -1 : 1) * DeltaRotator.Yaw
   );
-  
-  
 }
-
-
 
 void UTankAimingComponent::Fire()
 {
