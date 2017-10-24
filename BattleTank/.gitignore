@@ -74,4 +74,6 @@ Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 
-Content/StarterContent/*
+#### Not ignore starter content anymore, because I have
+#### cleared it out, and only migrated in what's needed.
+# Content/StarterContent/*
