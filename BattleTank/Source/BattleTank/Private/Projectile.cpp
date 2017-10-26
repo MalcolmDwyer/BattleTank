@@ -56,5 +56,8 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
   LaunchBlast->Deactivate();
   ImpactBlast->Activate();
   ExplosionForce->FireImpulse();
+  
+  SetRootComponent(ImpactBlast);
+  CollisionMesh->DestroyComponent();
 }
 
