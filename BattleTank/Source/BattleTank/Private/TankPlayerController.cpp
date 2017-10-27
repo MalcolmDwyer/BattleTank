@@ -3,6 +3,7 @@
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
 #include "Misc/AssertionMacros.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -10,6 +11,19 @@ void ATankPlayerController::BeginPlay()
   auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
   if (!ensure(AimingComponent)) { return; }
   FoundAimingComponent(AimingComponent);
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+  Super::SetPawn(InPawn);
+  if (InPawn) {
+    auto PossessedTank = Cast<ATank>(InPawn);
+    
+    if (!ensure(PossessedTank)) { return; }
+    
+    // TODO: subscribe our local method to tank's death event
+    PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
+  }
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -81,4 +95,10 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
   }
   
   return false;
+}
+
+
+void ATankPlayerController::OnPossessedTankDeath()
+{
+  UE_LOG(LogTemp, Warning, TEXT("Player Controller OnTankDeath"))
 }

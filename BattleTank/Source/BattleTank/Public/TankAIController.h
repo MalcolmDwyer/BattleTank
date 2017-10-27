@@ -20,5 +20,10 @@ protected:
   
 public:
   void BeginPlay() override;
+  virtual void SetPawn(APawn* InPawn) override; // Called when pawn gets posessed.
   virtual void Tick(float DeltaTime) override;
+  
+private:
+  UFUNCTION()
+  void OnPossessedTankDeath();
 };

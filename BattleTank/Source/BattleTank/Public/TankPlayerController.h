@@ -27,6 +27,7 @@ protected:
 
 public:
   void BeginPlay() override;
+  virtual void SetPawn(APawn* InPawn) override; // Called when pawn gets posessed.
   virtual void Tick(float DeltaTime) override;
   
   UPROPERTY(EditDefaultsOnly)
@@ -42,6 +43,9 @@ private:
   // Start moving the barrel so that it would shoot where the crosshair
   // intersects the world
   void AimTowardsCrossHair();
+
+  UFUNCTION()
+  void OnPossessedTankDeath();
   
   
   bool GetSightRayHitLocation(FVector &OutHitLocation) const;
